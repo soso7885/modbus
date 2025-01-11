@@ -132,7 +132,7 @@ static int set_termois(int fd)
 	struct termios2 tio;
 
 	ret = ioctl(fd, TCGETS2, &tio);
-	assert(ret > 0);
+	assert(ret >= 0);
 	
 	tio.c_iflag &= ~(ISTRIP|IUCLC|IGNCR|ICRNL|INLCR|ICANON|IXON|IXOFF|IXANY|PARMRK);
 	tio.c_iflag |= (IGNBRK|IGNPAR);
@@ -150,7 +150,7 @@ static int set_termois(int fd)
 	tio.c_ospeed = BAUDRATE;
 	tio.c_ispeed = BAUDRATE;
 	ret = ioctl(fd, TCSETS2, &tio);
-	assert(ret > 0);
+	assert(ret >= 0);
 	
 	mb_printf("Setting termios: ospeed %d ispeed %d\n", tio.c_ospeed, tio.c_ispeed);
 	
